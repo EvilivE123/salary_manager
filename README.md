@@ -5,8 +5,8 @@
 ## 🚀 Tech Stack
 
 * **Framework:** Rails 8.1.3
-* **Database:** PostgreSQL 16.13
-* **Deployment:** Containerized via Docker (Back4App)
+* **Database:** PostgreSQL 16.13 (using Neon for Production)
+* **Deployment:** Containerized via "Back4App"
 
 ---
 
