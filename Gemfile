@@ -43,7 +43,7 @@ gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
 # Pagination
-gem 'pagy', '~> 9.0'
+gem 'pagy', '~> 43.5'
 gem 'byebug'
 gem "psych", '5.3.1'
 group :development, :test do
