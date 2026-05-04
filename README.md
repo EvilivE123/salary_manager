@@ -27,6 +27,21 @@ Follow these steps to get your development environment running:
 ```bash
 git clone https://github.com/EvilivE123/salary_manager.git
 cd salary_manager
+```
+
+**2. Install dependencies**
+```bash
 bundle install
-rails db:setup
+yarn install
+```
+
+**3. Database Setup**
+```bash
+rails db:setup 
+(Note: You may need to configure your config/database.yml with your local PostgreSQL credentials if they differ from the default).
+```
+
+**4. Start Application**
+```bash
 bin/dev
+```
