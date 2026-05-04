@@ -25,7 +25,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
-  # config.assume_ssl = true
+  config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -68,7 +68,7 @@ Rails.application.configure do
   #   port: 587,
   #   authentication: :plain
   # }
-
+  config.action_dispatch.trusted_proxies = [IPAddr.new("0.0.0.0/0"), IPAddr.new("::/0")]
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
