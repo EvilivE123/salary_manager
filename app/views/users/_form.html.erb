@@ -1,0 +1,48 @@
+<%= form_with(model: user, local: true, class: "needs-validation") do |form| %>
+  <% if user.errors.any? %>
+    <div class="alert alert-danger shadow-sm">
+      <strong><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</strong>
+      <ul class="mb-0 mt-2">
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.label :first_name, class: "form-label fw-bold" %>
+      <%= form.text_field :first_name, class: "form-control", required: true %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :last_name, class: "form-label fw-bold" %>
+      <%= form.text_field :last_name, class: "form-control", required: true %>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :email, class: "form-label fw-bold" %>
+    <%= form.email_field :email, class: "form-control", required: true %>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <%= form.label :password, class: "form-label fw-bold" %>
+      <% if user.persisted? %>
+        <%= form.password_field :password, class: "form-control", required: !user.persisted?, placeholder: "Leave blank if you don't want to change it" %>
+      <% else %>
+        <%= form.password_field :password, class: "form-control", required: !user.persisted? %>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :password_confirmation, "Confirm Password", class: "form-label fw-bold" %>
+      <%= form.password_field :password_confirmation, class: "form-control", required: !user.persisted? %>
+    </div>
+  </div>
+
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <%= link_to 'Cancel', users_path, class: "btn btn-light border" %>
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

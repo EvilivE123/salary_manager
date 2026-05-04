@@ -1,0 +1,122 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Salary Insights Dashboard</h1>
+</div>
+
+<!-- Filter Form -->
+<div class="card shadow-sm mb-4">
+  <div class="card-body">
+    <form id="dashboard-filter-form" class="row g-3">
+      <div class="col-md-5">
+        <label class="form-label">Filter by Country</label>
+        <%= select_tag :country, options_for_select(@countries), prompt: "All Countries", class: "form-select dashboard-filter" %>
+      </div>
+      <div class="col-md-5">
+        <label class="form-label">Filter by Department</label>
+        <%= select_tag :department, options_for_select(@departments), prompt: "All Departments", class: "form-select dashboard-filter" %>
+      </div>
+      <div class="col-md-2 d-flex align-items-end">
+        <button type="button" id="reset-filters" class="btn btn-outline-secondary w-100">Reset</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- The 10 Widgets Grid -->
+<div class="row g-4" id="dashboard-widgets">
+  
+  <!-- KPI Row 1 -->
+  <div class="col-md-3">
+    <div class="card text-white bg-primary shadow-sm h-100">
+      <div class="card-body">
+        <h6 class="card-title">Total Employees</h6>
+        <h2 id="widget-total-headcount"><%= @metrics[:total_headcount] %></h2>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-white bg-success shadow-sm h-100">
+      <div class="card-body">
+        <h6 class="card-title">Active Employees</h6>
+        <h2 id="widget-active-employees"><%= @metrics[:active_employees] %></h2>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-dark bg-warning shadow-sm h-100">
+      <div class="card-body">
+        <h6 class="card-title">Average Salary</h6>
+        <h2 id="widget-avg-salary"><%= number_with_delimiter(@metrics[:avg_salary]) %></h2>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-white bg-danger shadow-sm h-100">
+      <div class="card-body">
+        <h6 class="card-title">Total Payroll</h6>
+        <h2 id="widget-total-payroll"><%= number_to_human(@metrics[:total_payroll], format: '%n%u', units: { million: 'M', billion: 'B' }) %></h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPI Row 2 -->
+  <div class="col-md-6">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h6 class="card-title text-muted">Compensation Range</h6>
+        <div class="d-flex justify-content-between mt-3">
+          <div>
+            <small>Minimum Salary</small>
+            <h4 id="widget-min-salary"><%= number_with_delimiter(@metrics[:min_salary]) %></h4>
+          </div>
+          <div class="text-end">
+            <small>Maximum Salary</small>
+            <h4 id="widget-max-salary"><%= number_with_delimiter(@metrics[:max_salary]) %></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Tables -->
+  <div class="col-md-6">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h6 class="card-title">Avg Salary by Country</h6>
+        <ul class="list-group list-group-flush" id="widget-salary-country">
+          <!-- Populated by JS/ERB -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h6 class="card-title">Avg Salary by Job Title (Top 5)</h6>
+        <ul class="list-group list-group-flush" id="widget-salary-job-title">
+          <!-- Populated by JS/ERB -->
+        </ul>
+      </div>
+    </div>
+  </div>  
+
+  <div class="col-md-6">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h6 class="card-title">Headcount by Department</h6>
+        <ul class="list-group list-group-flush" id="widget-headcount-by-department">
+          <!-- Populated by JS/ERB -->
+        </ul>
+      </div>
+    </div>
+  </div>  
+
+  <div class="col-md-6">
+    <div class="card shadow-sm h-100">
+      <div class="card-body" id="widget-recent-hires">
+        <!-- Populated by JS/ERB -->
+      </div>
+    </div>
+  </div>    
+  
+</div>

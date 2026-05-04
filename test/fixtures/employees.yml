@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  job_title: MyString
+  department: MyString
+  country: MyString
+  salary: 9.99
+  currency: MyString
+  hire_date: 2026-05-03
+  status: 1
+
+two:
+  first_name: MyString
+  last_name: MyString
+  job_title: MyString
+  department: MyString
+  country: MyString
+  salary: 9.99
+  currency: MyString
+  hire_date: 2026-05-03
+  status: 1

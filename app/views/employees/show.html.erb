@@ -1,0 +1,21 @@
+<div class="card shadow-sm mx-auto" style="max-width: 600px;">
+  <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+    <h3 class="mb-0">Employee Profile</h3>
+    <span class="badge bg-<%= @employee.active? ? 'success' : 'secondary' %>"><%= @employee.status.titleize %></span>
+  </div>
+  <div class="card-body">
+    <h4 class="card-title"><%= @employee.first_name %> <%= @employee.last_name %></h4>
+    <h6 class="card-subtitle mb-3 text-muted"><%= @employee.job_title %> - <%= @employee.department %></h6>
+    
+    <ul class="list-group list-group-flush mb-4">
+      <li class="list-group-item"><strong>Country:</strong> <%= @employee.country %></li>
+      <li class="list-group-item"><strong>Base Salary:</strong> <%= number_to_currency(@employee.salary, unit: @employee.currency + ' ') %></li>
+      <li class="list-group-item"><strong>Hire Date:</strong> <%= @employee.hire_date.strftime('%B %d, %Y') %></li>
+    </ul>
+
+    <div class="d-flex justify-content-between">
+      <%= link_to 'Back to Directory', employees_path, class: 'btn btn-outline-secondary' %>
+      <%= link_to 'Edit Details', edit_employee_path(@employee), class: 'btn btn-warning' %>
+    </div>
+  </div>
+</div>

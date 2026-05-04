@@ -1,0 +1,67 @@
+<%= form_with(model: employee, local: true, class: "needs-validation") do |form| %>
+  <% if employee.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(employee.errors.count, "error") %> prohibited this employee from being saved:</h4>
+      <ul>
+        <% employee.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.label :first_name, class: "form-label" %>
+      <%= form.text_field :first_name, class: "form-control", required: true %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :last_name, class: "form-label" %>
+      <%= form.text_field :last_name, class: "form-control", required: true %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.label :job_title, class: "form-label" %>
+      <%= form.text_field :job_title, class: "form-control", required: true %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :department, class: "form-label" %>
+      <%= form.text_field :department, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <%= form.label :country, class: "form-label" %>
+      <%= form.text_field :country, class: "form-control", required: true %>
+    </div>
+    <div class="col-md-4">
+      <%= form.label :salary, class: "form-label" %>
+      <div class="input-group">
+        <%= form.number_field :salary, step: "0.01", class: "form-control", required: true %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <%= form.label :currency, class: "form-label" %>
+      <%= form.select :currency, ['USD', 'EUR', 'GBP', 'INR'], {}, class: "form-select" %>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <%= form.label :hire_date, class: "form-label" %>
+      <%= form.date_field :hire_date, class: "form-control", required: true %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :status, class: "form-label" %>
+      <%= form.select :status, Employee.statuses.keys.map { |s| [s.titleize, s] }, {}, class: "form-select" %>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <%= link_to 'Cancel', employees_path, class: "btn btn-outline-secondary" %>
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

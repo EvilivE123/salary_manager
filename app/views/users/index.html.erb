@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Manage HR Managers</h1>
+  <%= link_to 'Add New HR Manager', new_user_path, class: 'btn btn-primary shadow-sm' %>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <form id="user-search-form" action="<%= users_path %>" method="GET" class="d-flex">
+      <input type="text" id="user-search-input" name="query" class="form-control me-2" placeholder="Search by name or email..." value="<%= params[:query] %>" autocomplete="off">
+      <!-- Preserve existing sorting states during search -->
+      <input type="hidden" name="sort" value="<%= params[:sort] %>">
+      <input type="hidden" name="direction" value="<%= params[:direction] %>">
+    </form>
+  </div>
+</div>
+
+<!-- Wrap the table in a Turbo Frame for dynamic updates -->
+<%= turbo_frame_tag "users_list" do %>
+  <div class="table-responsive bg-white rounded shadow-sm">
+    <table class="table table-hover table-bordered mb-0" id="users-table">
+      <thead class="table-light">
+        <tr>
+          <th><%= sortable_column "first_name", "First Name" %></th>
+          <th><%= sortable_column "last_name", "Last Name" %></th>
+          <th><%= sortable_column "email", "Email" %></th>
+          <th><%= sortable_column "role", "Role" %></th>
+          <th><%= sortable_column "created_at", "Date Added" %></th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr id="<%= dom_id(user) %>">
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.role.titleize %></td>
+            <td><%= user.created_at.strftime("%B %d, %Y") %></td>
+            <td>
+              <%= link_to 'View', user_path(user), data: { turbo_frame: "_top" }, class: 'btn btn-sm btn-info m-1' %>
+              <%= link_to 'Edit', edit_user_path(user), data: { turbo_frame: "_top" }, class: 'btn btn-sm btn-warning m-1' %>
+              <button class="btn btn-sm btn-danger delete-user-btn m-1" data-id="<%= user.id %>">Delete</button>            
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-4 d-flex justify-content-center">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
+<% end %>

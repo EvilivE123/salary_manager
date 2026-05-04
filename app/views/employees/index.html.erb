@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Employee Directory</h1>
+  <%= link_to 'Add New Employee', new_employee_path, class: 'btn btn-primary' %>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <form id="employee-search-form" action="<%= employees_path %>" method="GET" class="d-flex">
+      <input type="text" id="employee-search-input" name="query" class="form-control me-2" placeholder="Search by name, title, or dept..." value="<%= params[:query] %>" autocomplete="off">
+      <!-- Preserve sorting parameters during search -->
+      <input type="hidden" name="sort" value="<%= params[:sort] %>">
+      <input type="hidden" name="direction" value="<%= params[:direction] %>">
+    </form>
+  </div>
+</div>
+
+<%= turbo_frame_tag "employees_list" do %>
+  <div class="table-responsive bg-white rounded shadow-sm">
+    <table class="table table-hover table-bordered mb-0" id="employees-table">
+      <thead class="table-light">
+        <tr>
+          <th><%= sortable_column "first_name", "Name" %></th>
+          <th><%= sortable_column "job_title", "Job Title" %></th>
+          <th><%= sortable_column "department", "Department" %></th>
+          <th><%= sortable_column "country", "Country" %></th>
+          <th><%= sortable_column "salary", "Salary" %></th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="employees-tbody">
+        <% @employees.each do |employee| %>
+          <%= render partial: "employee_row", locals: { employee: employee } %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="mt-4 d-flex justify-content-center">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
+<% end %>

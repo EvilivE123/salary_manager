@@ -1,0 +1,12 @@
+<tr id="<%= dom_id(employee) %>">
+  <td><%= employee.first_name %> <%= employee.last_name %></td>
+  <td><%= employee.job_title %></td>
+  <td><%= employee.department %></td>
+  <td><%= employee.country %></td>
+  <td><%= number_to_currency(employee.salary, unit: employee.currency + ' ') %></td>
+  <td>
+    <%= link_to 'View', employee_path(employee), data: { turbo_frame: "_top" }, class: 'btn btn-sm btn-info text-white m-1' %>
+    <%= link_to 'Edit', edit_employee_path(employee), data: { turbo_frame: "_top" }, class: 'btn btn-sm btn-warning m-1' %>
+    <button class="btn btn-sm btn-danger delete-employee-btn m-1" data: { turbo_confirm: 'Are you sure?', turbo_frame: "_top" } data-id="<%= employee.id %>">Delete</button>            
+  </td>
+</tr>
