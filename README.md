@@ -1,24 +1,32 @@
-# README
+# Salary Manager
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> A high-performance Ruby on Rails application designed to streamline employee data management, track compensation KPIs, and securely administer role-based payroll operations through a dynamic dashboard.
 
-Things you may want to cover:
+## 🚀 Tech Stack
 
-* Ruby version
+* **Framework:** Rails 8.1.3
+* **Database:** PostgreSQL 16.13
+* **Deployment:** Containerized via Docker (Back4App)
 
-* System dependencies
+---
 
-* Configuration
+## 📋 Prerequisites
 
-* Database creation
+Before you begin, ensure you have the following installed on your local machine:
+* Ruby (v3.x or higher)
+* PostgreSQL
+* Node.js & Yarn (for asset management)
 
-* Database initialization
+---
 
-* How to run the test suite
+## 🛠️ Local Development Setup
 
-* Services (job queues, cache servers, search engines, etc.)
+Follow these steps to get your development environment running:
 
-* Deployment instructions
-
-* ...
+**1. Clone the repository**
+```bash
+git clone https://github.com/EvilivE123/salary_manager.git
+cd salary_manager
+bundle install
+rails db:setup
+bin/dev
