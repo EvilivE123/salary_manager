@@ -86,6 +86,6 @@ test:
 #
 production:
   <<: *default
-    url: <%= ENV["DATABASE_URL"] %>
-    connector: postgresql
-    advisory_locks: false # Required for some serverless DBs like Neon
+  url: <%= ENV["DATABASE_URL"] %>
+  connector: postgresql
+  advisory_locks: false # Required for some serverless DBs like Neon
