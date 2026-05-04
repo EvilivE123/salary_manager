@@ -4,5 +4,11 @@
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
   ./bin/rails db:prepare
 fi
+# Force database migration before starting the app
+echo "Running database migrations..."
+./bin/rails db:migrate
+
+echo "Seeding database"
+./bin/rails db:seed
 
 exec "${@}"
